@@ -19,6 +19,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <link rel="import" href="../../things-scene-viewer/things-scene-layer.html">
     <link rel="import" href="../../things-scene-viewer/things-scene-handler.html">
 
+    <link rel="import" href="../../things-designer-elements/things-editor-color.html">
+    <link rel="import" href="../../things-designer-elements/things-editor-color-stops.html">
+    <link rel="import" href="../../things-scene-modeler/things-scene-properties.html">
+
     <link rel="import" href="./things-scene-progress-bar.html">
 
     <style is="custom-style">
@@ -40,14 +44,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <template is="dom-bind" id="app">
       <p>An example of <code>&lt;things-scene-progressbar&gt;</code>:</p>
 
-      <things-scene-viewer id='scene' model='{{model}}' mode="1">
+      <things-scene-viewer id='scene'
+                           scene='{{scene}}'
+                           selected='{{selected}}'
+                           model='[[model]]'
+                           mode="1">
         <things-scene-layer type="selection-layer"></things-scene-layer>
         <things-scene-layer type="modeling-layer"></things-scene-layer>
         <things-scene-handler type="text-editor"></things-scene-handler>
         <things-scene-handler type="move-handler"></things-scene-handler>
       </things-scene-viewer>
 
-      <button id="change">Change Value</button>
+      <things-scene-properties scene="[[scene]]"
+                               selected="[[selected]]"
+                               model="{{target}}"
+                               bounds="{{bounds}}">
+        <fieldset class="column-double">
+          <legend>progress style</legend>
+          <label>value</label>
+          <input type="number" value-as-number="{{target.value::change}}" min="0" max="100" step="1"/>
+        </fieldset>
+      </things-scene-properties>
 
     </template>
 
@@ -55,141 +72,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       window.addEventListener('WebComponentsReady', function(e) {
         var app = document.querySelector('#app')
 
-        app.$.change.addEventListener('click', function() {
-          var viewer = app.$.scene
-          viewer.findAll('progress-bar')[0].set('value', 0 + Math.round(Math.random() * 240))
-          viewer.findAll('progress-bar')[0].set('colorStops',[
-              { position:40,
-                color: '#00ff00'},
-              { position: 70,
-                color: '#ffff00'},
-              { position: 170,
-                color: '#ff0000'}])
-        })
-
         app.model = {
           components: [{
-          //   type: 'progress-bar',
-          //   cx: 300,
-          //   cy: 300,
-          //   rx: 200,
-          //   ry: 200,
-          //   fillStyle: '#ff00ff',
-          //   // strokeStyle: '#552555',
-          //   lineWidth: 5,
-          //   alpha: 0.8,
-          //   value: 65,
-          //   startValue: 00,
-          //   endValue: 100,
-          //   step: 7,
-          //   fontColor: 'black',
-          //   showEndText: false,
-          //   textFillStyle: 'blue',
-          //   needleFillStyle: 'red',
-          //   stepFillStyle: 'black',
-          //   needleSize: 5,
-          //   subStep: 2,
-          //   startAngle: 90,
-          //   endAngle: 270,
-          //   ratio: 77,
-          //   angle: 270,
-          //   subTextSize: 5,
-          //   // text: "#{value}%"
-          // }, {
-            type: 'progress-bar',
-            cx: 900,
-            cy: 300,
-            rx: 200,
-            ry: 200,
-            fontSize: 80,
-            fillStyle: '#ff00ff',
-            // strokeStyle: '#552555',
-            fontColor: '#FF0000',
-            lineWidth: 5,
-            startAngle: 0,
-            endAngle: 230,
-            value: 65,
-            startValue: 00,
-            endValue: 240,
-            step: 20,
-            fontColor: 'black',
-            colorStops:[
-              { position:30,
-                color: '#00ff00'},
-              { position: 100,
-                color: '#ffff00'},
-              { position: 220,
-                color: '#ff0000'}],
-            textFillStyle: 'blue',
-            stepFillStyle: 'gray',
-            needleFillStyle: 'red',
-            ratio: 70,
-            subStep: 2,
-            subTextSize: 5,
+
           }, {
             type: 'progress-bar',
-            cx: 900,
-            cy: 700,
-            rx: 200,
-            ry: 100,
+            top:200,
+            left: 200,
+            width:300,
+            height: 300,
             fontSize: 80,
             fillStyle: '#ff00ff',
             // strokeStyle: '#552555',
             fontColor: '#FF0000',
             lineWidth: 5,
-            startAngle: 0,
-            endAngle: 270,
             value: 65,
-            startValue: 20,
-            endValue: 90,
-            step: 20,
-            fontColor: 'black',
-            colorStops:[
-              { position:30,
-                color: '#00ff00'},
-              { position: 100,
-                color: '#ffff00'},
-              { position: 220,
-                color: '#ff0000'}],
-            textFillStyle: 'blue',
-            stepFillStyle: 'gray',
-            needleFillStyle: 'red',
-            ratio: 70,
-            subStep: 2,
-            subTextSize: 5,
-            // text: "#{value}%"
-          }, {
-            type: 'progress-bar',
-            cx: 300,
-            cy: 700,
-            rx: 200,
-            ry: 200,
-            fontSize: 80,
-            fillStyle: '#ff00ff',
-            // strokeStyle: '#552555',
-            fontColor: '#FF0000',
-            lineWidth: 5,
-            startAngle: 0,
-            endAngle: 180,
-            value: 65,
-            startValue: 20,
-            endValue: 220,
-            step: 20,
-            fontColor: 'black',
-           colorStops:[
-              { position:30,
-                color: '#00ff00'},
-              { position: 100,
-                color: '#ffff00'},
-              { position: 220,
-                color: '#ff0000'}],
-            textFillStyle: 'blue',
-            stepFillStyle: 'gray',
-            needleFillStyle: 'red',
-            ratio: 70,
-            subStep: 2,
-            subTextSize: 5,
-            // text: "#{value}%"
           }]
         }
       });

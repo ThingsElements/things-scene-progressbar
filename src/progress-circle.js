@@ -5,7 +5,7 @@ export default class ProgressCircle extends scene.Ellipse {
       value = 0,
       hidden = false,
       lineWidth = 20,
-      innerStrokeStyle,
+      blankStrokeStyle,
       rounding = 0,
       cx, cy, rx, ry
     } = this.model;
@@ -15,7 +15,9 @@ export default class ProgressCircle extends scene.Ellipse {
       console.log(value)
       context.beginPath()
 
-      context.strokeStyle = innerStrokeStyle
+      
+      this.drawStroke(context)
+      context.strokeStyle = blankStrokeStyle
       context.ellipse(cx, cy, Math.abs(rx), Math.abs(ry), 0, 0, 2 * Math.PI)
       context.lineWidth = lineWidth
       this.drawFill(context)
