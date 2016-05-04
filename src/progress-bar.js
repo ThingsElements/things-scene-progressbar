@@ -11,7 +11,7 @@ export default class ProgressBar extends scene.Rect {
       hidden = false
     } = this.model;
 
-    var rect = new Rect({});
+    var rect = new scene.Rect({});
     rect.parent = this.parent;
     rect.set({
       top: this.model.top + 1,
@@ -21,7 +21,7 @@ export default class ProgressBar extends scene.Rect {
     });
 
     if(!hidden){
-      rect._draw(ctx);
+      rect._draw(ctx)
       this.drawFill(ctx)
       this.drawStroke(ctx)
     }

@@ -6,10 +6,13 @@ export default class ProgressCircle extends scene.Ellipse {
       hidden = false,
       lineWidth = 20,
       innerStrokeStyle,
+      rounding = 0,
       cx, cy, rx, ry
     } = this.model;
 
     if(!hidden){
+      // value = value.toFixed(rounding) // 소수점이 너무 길게 나오므로 소수점 표기 정의
+      console.log(value)
       context.beginPath()
 
       context.strokeStyle = innerStrokeStyle
@@ -27,6 +30,25 @@ export default class ProgressCircle extends scene.Ellipse {
 
       this.drawStroke(context)
     }
+  }
+
+  onchange(after, before) {
+    if(!after.hasOwnProperty('value'))
+      return
+
+    var value = after.value
+    var self = this
+
+    this.model.value = before.value
+
+    this.animate({
+      step: function(delta) {
+        self.model.value = before.value + delta * (value - before.value)
+        self.invalidate()
+      },
+      delta: 'circ',
+      ease: 'out'
+    }).start()
   }
 }
 
