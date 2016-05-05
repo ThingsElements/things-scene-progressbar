@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "watch": "watchify src/*.js -o things-scene-progressbar.js src/index.js",
+    "serve": "watchify src/*.js -o things-scene-progressbar.js src/index.js & polyserve",
     "build": "browserify src/index.js -o things-scene-progressbar.js && uglifyjs things-scene-progressbar.js -o things-scene-progressbar-min.js"
   },
   "repository": {
