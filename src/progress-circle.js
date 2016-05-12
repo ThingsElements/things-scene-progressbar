@@ -27,7 +27,7 @@ export default class ProgressCircle extends scene.Ellipse {
       context.beginPath()
 
       ////  채워지는 원 그리기  ////
-      var percent = Math.min(Math.max(0, (value + (this._anim_alpha || 0)) / 50 || 0), 2)   // PI * 2 가 원의 한바퀴 이므로 value가 100일때 2가 되기위해 50으로 나눠줌
+      var percent = Math.min(Math.max(0, (value + (this._anim_alpha || 0)) / 50), 2)   // PI * 2 가 원의 한바퀴 이므로 value가 100일때 2가 되기위해 50으로 나눠줌
       context.ellipse(cx, cy, Math.abs(rx), Math.abs(ry), 0, - Math.PI / 2, percent * Math.PI - Math.PI / 2)
 
       this.drawStroke(context)
