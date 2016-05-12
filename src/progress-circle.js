@@ -6,19 +6,18 @@ export default class ProgressCircle extends scene.Ellipse {
       hidden = false,
       lineWidth = 20,
       blankStrokeStyle,
-      rounding = 0,
       cx, cy, rx, ry
     } = this.model;
 
     if(!hidden){
-      // value = value.toFixed(rounding) // 소수점이 너무 길게 나오므로 소수점 표기 정의
-      console.log(value)
       context.beginPath()
-
       
       this.drawStroke(context)
+
+      //// / 바깥쪽 원 그리기  ////
       context.strokeStyle = blankStrokeStyle
       context.ellipse(cx, cy, Math.abs(rx), Math.abs(ry), 0, 0, 2 * Math.PI)
+      
       context.lineWidth = lineWidth
       this.drawFill(context)
       context.stroke()
@@ -27,8 +26,9 @@ export default class ProgressCircle extends scene.Ellipse {
 
       context.beginPath()
 
-      var percent = Math.min(Math.max(0, value / 100 || 1), 1);
-      context.ellipse(cx, cy, Math.abs(rx), Math.abs(ry), 0, - Math.PI / 2, percent * 2 * Math.PI - Math.PI / 2)
+      ////  채워지는 원 그리기  ////
+      var percent = Math.min(Math.max(0, (value + (this._anim_alpha || 0)) / 50 || 0), 2)   // PI * 2 가 원의 한바퀴 이므로 value가 100일때 2가 되기위해 50으로 나눠줌
+      context.ellipse(cx, cy, Math.abs(rx), Math.abs(ry), 0, - Math.PI / 2, percent * Math.PI - Math.PI / 2)
 
       this.drawStroke(context)
     }
@@ -38,17 +38,21 @@ export default class ProgressCircle extends scene.Ellipse {
     if(!after.hasOwnProperty('value'))
       return
 
-    var value = after.value
     var self = this
+    var diff = after.value - before.value
 
-    this.model.value = before.value
+    this._anim_alpha = -diff
 
     this.animate({
       step: function(delta) {
-        self.model.value = before.value + delta * (value - before.value)
+        self._anim_alpha = diff * (delta - 1)
         self.invalidate()
       },
+      duration: 1000,
       delta: 'circ',
+      options: {
+        x: 1
+      },
       ease: 'out'
     }).start()
   }

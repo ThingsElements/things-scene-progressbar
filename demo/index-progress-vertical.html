@@ -76,17 +76,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           components: [{
 
           }, {
-            type: 'progress-bar',
+            type: 'progress-vertical',
             top:200,
             left: 200,
-            width:300,
-            height: 300,
+            width:100,
+            height: 600,
             fontSize: 80,
             fillStyle: '#ff00ff',
             // strokeStyle: '#552555',
             fontColor: '#FF0000',
+            strokeStyle: '#000',
             lineWidth: 5,
-            value: 65,
+            value: 80,
+            text: '#{value}',
+            lineCap: 'round',
           }]
         }
       });
