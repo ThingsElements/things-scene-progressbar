@@ -6,29 +6,25 @@ export default class ProgressVertical extends scene.Rect {
       left,
       height,
       width,
-      value,
-      hidden = false
+      value
     } = this.model;
 
-    if(!hidden){
+    context.beginPath()
 
-      context.beginPath()
+    value = Math.max(Math.min(value, 100), 0)   // value는 0~100 사이
+    var drawValue = height - height * (value + (this._anim_alpha || 0)) / 100
+    drawValue = Math.max(Math.min(drawValue, height), 0)  // DrawValue도 높이보다 작거나 커지지 말아야 한다.
 
-      value = Math.max(Math.min(value, 100), 0)   // value는 0~100 사이
-      var drawValue = height - height * (value + (this._anim_alpha || 0)) / 100
-      drawValue = Math.max(Math.min(drawValue, height), 0)  // DrawValue도 높이보다 작거나 커지지 말아야 한다.
+    context.rect(left, top + drawValue, width, height - drawValue)
 
-      context.rect(left, top + drawValue, width, height - drawValue)
+    this.drawFill(context)
 
-      this.drawFill(context)
+    context.closePath()
 
-      context.closePath()
+    context.beginPath()
 
-      context.beginPath()
-
-      context.rect(left, top, width, height)
-      this.drawStroke(context)
-    }
+    context.rect(left, top, width, height)
+    this.drawStroke(context)
   }
   get controls() {}
 
