@@ -17,11 +17,12 @@ export default class ProgressCircle extends scene.Ellipse {
     this.drawStroke(context)
     // Angle마다 '-90'와 '-0.5 * Math.PI'가 있는 이유는 0도를 시계의 12시 방향으로 맞추기 위함.
     var startAngleToRadian = (startAngle - 90) * RADIAN * Math.PI
-    var endAngleToRadian = endAngle * RADIAN * Math.PI
+    var endAngleToRadian = (endAngle - 90) * RADIAN * Math.PI
+
 
     //// / 바깥쪽 원 그리기  ////
     context.strokeStyle = blankStrokeStyle
-    context.ellipse(cx, cy, Math.abs(rx), Math.abs(ry), 0, startAngleToRadian, endAngleToRadian - 0.5 * Math.PI)
+    context.ellipse(cx, cy, Math.abs(rx), Math.abs(ry), 0, startAngleToRadian, endAngleToRadian)
 
     context.lineWidth = lineWidth
     this.drawFill(context)
@@ -33,7 +34,7 @@ export default class ProgressCircle extends scene.Ellipse {
 
     ////  채워지는 원 그리기  ////
     var percent = Math.min(Math.max((value + (this._anim_alpha || 0)) / 100, 0), 100)
-    context.ellipse(cx, cy, Math.abs(rx), Math.abs(ry), 0, startAngleToRadian, percent * endAngleToRadian - 0.5 * Math.PI)
+    context.ellipse(cx, cy, Math.abs(rx), Math.abs(ry), 0, startAngleToRadian, startAngleToRadian + ((endAngleToRadian - startAngleToRadian) * percent))
 
     this.drawStroke(context)
   }
