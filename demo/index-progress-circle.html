@@ -67,6 +67,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <label>blankStrokeStyle</label>
           <things-editor-color value="{{target.blankStrokeStyle}}">
           </things-editor-color>
+
+          <label>startAngle</label>
+          <input type="number" value-as-number="{{target.startAngle::change}}" min="0" max="360" step="1"/>
+
+          <label>endAngle</label>
+          <input type="number" value-as-number="{{target.endAngle::change}}" min="0" max="360" step="1"/>
+
         </fieldset>
       </things-scene-properties>
 
@@ -77,13 +84,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         var app = document.querySelector('#app')
 
         app.model = {
+          height: 1000,
+          width: 1000,
           components: [{
             type: 'progress-circle',
-            cx: 900,
+            cx: 300,
             cy: 300,
-            rx: 200,
-            ry: 200,
+            rx: 150,
+            ry: 150,
             fontSize: 80,
+            startAngle: 0,
+            endAngle: 180,
             fillStyle: '#ffffaa',
             strokeStyle: '#552555',
             blankStrokeStyle: '#aaa',
