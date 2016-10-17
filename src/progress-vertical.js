@@ -26,6 +26,7 @@ export default class ProgressVertical extends scene.Rect {
   }
 
   _post_draw(context) {
+    this.drawStroke(context);
     this.drawText(context);
   }
 
