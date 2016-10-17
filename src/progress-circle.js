@@ -39,6 +39,10 @@ export default class ProgressCircle extends scene.Ellipse {
     this.drawStroke(context)
   }
 
+  _post_draw(context) {
+    this.drawText(context);
+  }
+  
   onchange(after, before) {
     if(!after.hasOwnProperty('value'))
       return
