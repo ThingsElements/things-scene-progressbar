@@ -7,6 +7,21 @@ const NATURE = {
     label: 'value',
     name: 'value',
     property: 'value'
+  },{
+    type: 'number',
+    label: 'startAngle',
+    name: 'startAngle',
+    property: 'startAngle'
+  },{
+    type: 'number',
+    label: 'endAngle',
+    name: 'endAngle',
+    property: 'endAngle'
+  },{
+    type: 'color',
+    label: 'blankStrokeStyle',
+    name: 'blankStrokeStyle',
+    property: 'blankStrokeStyle'
   }]
 }
 
