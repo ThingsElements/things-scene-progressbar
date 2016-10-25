@@ -1,3 +1,15 @@
+const NATURE = {
+  mutable: false,
+  resizable: true,
+  rotatable: true,
+  properties : [{
+    type: 'number',
+    label: 'value',
+    name: 'value',
+    property: 'value'
+  }]
+}
+
 export default class ProgressVertical extends scene.Rect {
 
   _draw(context) {
@@ -53,6 +65,10 @@ export default class ProgressVertical extends scene.Rect {
       },
       ease: 'out'
     }).start()
+  }
+
+  get nature(){
+    return NATURE
   }
 }
 

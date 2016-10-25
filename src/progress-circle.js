@@ -1,3 +1,15 @@
+const NATURE = {
+  mutable: false,
+  resizable: true,
+  rotatable: true,
+  properties : [{
+    type: 'number',
+    label: 'value',
+    name: 'value',
+    property: 'value'
+  }]
+}
+
 export default class ProgressCircle extends scene.Ellipse {
 
   _draw(context) {
@@ -42,7 +54,7 @@ export default class ProgressCircle extends scene.Ellipse {
   _post_draw(context) {
     this.drawText(context);
   }
-  
+
   onchange(after, before) {
     if(!after.hasOwnProperty('value'))
       return
@@ -64,6 +76,10 @@ export default class ProgressCircle extends scene.Ellipse {
       },
       ease: 'out'
     }).start()
+  }
+
+  get nature(){
+    return NATURE
   }
 }
 
