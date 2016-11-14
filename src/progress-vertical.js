@@ -7,6 +7,11 @@ const NATURE = {
     label: 'value',
     name: 'value',
     property: 'value'
+  }, {
+    type: 'color',
+    label: 'backgroundColor',
+    name: 'backgroundColor',
+    property: 'backgroundColor'
   }]
 }
 
@@ -18,9 +23,18 @@ export default class ProgressVertical extends scene.Rect {
       left,
       height,
       width,
-      value
+      value,
+      backgroundColor = 'transparent'
     } = this.model;
 
+    // background의 색상
+    context.beginPath()
+    context.rect(left, top, width, height)
+
+    context.fillStyle = backgroundColor
+    context.fill()
+
+    // value의 색상
     context.beginPath()
 
     value = Math.max(Math.min(value, 100), 0)   // value는 0~100 사이

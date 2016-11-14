@@ -73,6 +73,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         var app = document.querySelector('#app')
 
         app.model = {
+          width: 500,
+          height: 500,
           components: [{
             type: 'progress-vertical',
             top: 100,
@@ -88,6 +90,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             value: 40,
             text: '#{value}',
             lineCap: 'round',
+            // backgroundColor: 'blue'
           }]
         }
       });
