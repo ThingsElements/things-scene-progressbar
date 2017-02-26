@@ -3,7 +3,7 @@ const NATURE = {
   resizable: true,
   rotatable: true,
   properties : [{
-    type: 'number',
+    type: 'string',
     label: 'value',
     name: 'value',
     property: 'value'
@@ -15,7 +15,9 @@ const NATURE = {
   }]
 }
 
-export default class ProgressVertical extends scene.Rect {
+var { ValueHolder, RectPath, Shape } = scene
+
+export default class ProgressVertical extends ValueHolder(RectPath(Shape)) {
 
   _draw(context) {
     var {
@@ -23,9 +25,10 @@ export default class ProgressVertical extends scene.Rect {
       left,
       height,
       width,
-      value,
       backgroundColor = 'transparent'
     } = this.model;
+
+    this.animOnValueChange(this.value)
 
     // background의 색상
     context.beginPath()
@@ -37,8 +40,7 @@ export default class ProgressVertical extends scene.Rect {
     // value의 색상
     context.beginPath()
 
-    value = Math.max(Math.min(value, 100), 0)   // value는 0~100 사이
-    var drawValue = height - height * ((value + (this._anim_alpha || 0)) / 100)
+    var drawValue = height - height * Math.max(Math.min(this.animValue, 100), 0) / 100
     drawValue = Math.max(Math.min(drawValue, height), 0)  // DrawValue도 높이보다 작거나 커지지 말아야 한다.
     context.rect(left, top + drawValue, width, height - drawValue)
 
@@ -54,31 +56,6 @@ export default class ProgressVertical extends scene.Rect {
   _post_draw(context) {
     this.drawStroke(context);
     this.drawText(context);
-  }
-
-  get controls() {}
-
-  onchange(after, before) {
-    if(!after.hasOwnProperty('value'))
-      return
-
-    var self = this
-    var diff = after.value - before.value
-
-    this._anim_alpha = -diff
-
-    this.animate({
-      step: function(delta) {
-        self._anim_alpha = diff * (delta - 1)
-        self.invalidate()
-      },
-      duration: 1000,
-      delta: 'circ',
-      options: {
-        x: 1
-      },
-      ease: 'out'
-    }).start()
   }
 
   get nature(){

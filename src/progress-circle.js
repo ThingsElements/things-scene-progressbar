@@ -3,7 +3,7 @@ const NATURE = {
   resizable: true,
   rotatable: true,
   properties : [{
-    type: 'number',
+    type: 'string',
     label: 'value',
     name: 'value',
     property: 'value'
@@ -25,17 +25,20 @@ const NATURE = {
   }]
 }
 
-export default class ProgressCircle extends scene.Ellipse {
+var { ValueHolder, Ellipse } = scene
+
+export default class ProgressCircle extends ValueHolder(Ellipse) {
 
   _draw(context) {
     var {
-      value = 0,
       startAngle = 0,
       endAngle = 360,
       lineWidth = 20,
       blankStrokeStyle,
       cx, cy, rx, ry
     } = this.model;
+
+    this.animOnValueChange(this.value)
 
     const RADIAN = 0.0174533 / Math.PI
 
@@ -58,11 +61,8 @@ export default class ProgressCircle extends scene.Ellipse {
 
     context.beginPath()
 
-    // value 값이 100을 초과하는 경우 value값을 항상 100으로 고정한다.
-    if(value>100) value=100;
-
     ////  채워지는 원 그리기  ////
-    var percent = Math.min(Math.max((value + (this._anim_alpha || 0)) / 100, 0), 100)
+    var percent = Math.min(Math.max(this.animValue / 100, 0), 100)
 
     context.ellipse(cx, cy, Math.abs(rx), Math.abs(ry), 0, startAngleToRadian, startAngleToRadian + ((endAngleToRadian - startAngleToRadian) * percent))
 
@@ -71,29 +71,6 @@ export default class ProgressCircle extends scene.Ellipse {
 
   _post_draw(context) {
     this.drawText(context);
-  }
-
-  onchange(after, before) {
-    if(!after.hasOwnProperty('value'))
-      return
-
-    var self = this
-    var diff = after.value - before.value
-
-    this._anim_alpha = -diff
-
-    this.animate({
-      step: function(delta) {
-        self._anim_alpha = diff * (delta - 1)
-        self.invalidate()
-      },
-      duration: 1000,
-      delta: 'circ',
-      options: {
-        x: 1
-      },
-      ease: 'out'
-    }).start()
   }
 
   get nature(){
