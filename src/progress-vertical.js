@@ -12,7 +12,7 @@ const NATURE = {
     property: 'value'
   }, {
     type: 'color',
-    label: 'backgroundColor',
+    label: 'background-color',
     name: 'backgroundColor',
     property: 'backgroundColor'
   }]

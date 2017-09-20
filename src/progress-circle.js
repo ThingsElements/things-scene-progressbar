@@ -12,17 +12,17 @@ const NATURE = {
     property: 'value'
   },{
     type: 'number',
-    label: 'startAngle',
+    label: 'start-angle',
     name: 'startAngle',
     property: 'startAngle'
   },{
     type: 'number',
-    label: 'endAngle',
+    label: 'end-angle',
     name: 'endAngle',
     property: 'endAngle'
   },{
     type: 'color',
-    label: 'blankStrokeStyle',
+    label: 'blank-stroke-style',
     name: 'blankStrokeStyle',
     property: 'blankStrokeStyle'
   }]
