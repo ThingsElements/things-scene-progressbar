@@ -1,6 +1,9 @@
 /*
  * Copyright © HatioLab Inc. All rights reserved.
  */
+
+import { Component, ValueHolder, Ellipse } from '@hatiolab/things-scene'
+
 const NATURE = {
   mutable: false,
   resizable: true,
@@ -27,8 +30,6 @@ const NATURE = {
     property: 'blankStrokeStyle'
   }]
 }
-
-var { ValueHolder, Ellipse } = scene
 
 export default class ProgressCircle extends ValueHolder(Ellipse) {
 
@@ -81,4 +82,4 @@ export default class ProgressCircle extends ValueHolder(Ellipse) {
   }
 }
 
-scene.Component.register('progress-circle', ProgressCircle)
+Component.register('progress-circle', ProgressCircle)
