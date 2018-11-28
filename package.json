@@ -24,11 +24,6 @@
     "url": "https://github.com/ThingsElements/things-scene-progressbar/issues"
   },
   "homepage": "https://github.com/ThingsElements/things-scene-progressbar#readme",
-  "browserify": {
-    "transform": [
-      "babelify"
-    ]
-  },
   "devDependencies": {
     "@hatiolab/things-shell": "*"
   },
