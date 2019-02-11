@@ -3,7 +3,9 @@
   "version": "2.3.0",
   "description": "An element providing a starting point for your own reusable Polymer elements.",
   "things-scene": true,
-  "main": "src/index.js",
+  "main": "dist/things-scene-progressbar.js",
+  "module": "dist/things-scene-progressbar.mjs",
+  "jsnext:main": "dist/things-scene-progressbar.mjs",
   "directories": {
     "test": "test"
   },
