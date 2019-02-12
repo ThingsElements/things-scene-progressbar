@@ -21,7 +21,7 @@ export default [
     external,
     output: [
       {
-        file: pkg.main,
+        file: "dist/things-scene-progressbar.js",
         name: "things-scene-progressbar",
         format: "umd",
         globals: {
