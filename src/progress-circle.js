@@ -40,6 +40,7 @@ export default class ProgressCircle extends ValueHolder(Ellipse) {
       lineWidth = 20,
       blankStrokeStyle,
       cx, cy, rx, ry,
+      lineWidth,
       packmanStyle = false
     } = this.model;
 
@@ -68,7 +69,7 @@ export default class ProgressCircle extends ValueHolder(Ellipse) {
       context.ellipse(cx, cy, Math.abs(rx), Math.abs(ry), 0, startAngleToRadian, startAngleToRadian + ((endAngleToRadian - startAngleToRadian) * percent))
       context.lineTo(cx, cy)
     } else {
-      context.ellipse(cx, cy, Math.abs(rx), Math.abs(ry), 0, startAngleToRadian, endAngleToRadian)
+      context.ellipse(cx, cy, Math.abs(rx - lineWidth / 2), Math.abs(rx - lineWidth / 2), 0, startAngleToRadian, endAngleToRadian)
     }
     this.drawFill(context)
 
@@ -77,7 +78,6 @@ export default class ProgressCircle extends ValueHolder(Ellipse) {
     context.beginPath()
 
     ////  채워지는 원 그리기  ////
-
     context.ellipse(cx, cy, Math.abs(rx), Math.abs(ry), 0, startAngleToRadian, startAngleToRadian + ((endAngleToRadian - startAngleToRadian) * percent))
 
     this.drawStroke(context)
