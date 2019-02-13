@@ -1,6 +1,9 @@
 /*
  * Copyright © HatioLab Inc. All rights reserved.
  */
+
+import { Component, ValueHolder, RectPath, Shape } from '@hatiolab/things-scene'
+
 const NATURE = {
   mutable: false,
   resizable: true,
@@ -22,8 +25,6 @@ const NATURE = {
     property: 'reverse'
   }]
 }
-
-var { ValueHolder, RectPath, Shape } = scene
 
 export default class ProgressHorizontal extends ValueHolder(RectPath(Shape)) {
 
@@ -79,4 +80,4 @@ export default class ProgressHorizontal extends ValueHolder(RectPath(Shape)) {
   }
 }
 
-scene.Component.register('progress-horizontal', ProgressHorizontal)
+Component.register('progress-horizontal', ProgressHorizontal)

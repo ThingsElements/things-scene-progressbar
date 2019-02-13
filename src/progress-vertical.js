@@ -1,6 +1,9 @@
 /*
  * Copyright © HatioLab Inc. All rights reserved.
  */
+
+ import { Component, ValueHolder, RectPath, Shape } from '@hatiolab/things-scene'
+
 const NATURE = {
   mutable: false,
   resizable: true,
@@ -17,8 +20,6 @@ const NATURE = {
     property: 'backgroundColor'
   }]
 }
-
-var { ValueHolder, RectPath, Shape } = scene
 
 export default class ProgressVertical extends ValueHolder(RectPath(Shape)) {
 
@@ -66,4 +67,4 @@ export default class ProgressVertical extends ValueHolder(RectPath(Shape)) {
   }
 }
 
-scene.Component.register('progress-vertical', ProgressVertical)
+Component.register('progress-vertical', ProgressVertical)
