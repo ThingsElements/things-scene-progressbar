@@ -11,23 +11,23 @@ const NATURE = {
   properties : [{
     type: 'string',
     label: 'value',
-    name: 'value',
-    property: 'value'
+    name: 'value'
   },{
     type: 'number',
     label: 'start-angle',
-    name: 'startAngle',
-    property: 'startAngle'
+    name: 'startAngle'
   },{
     type: 'number',
     label: 'end-angle',
-    name: 'endAngle',
-    property: 'endAngle'
+    name: 'endAngle'
   },{
     type: 'color',
     label: 'blank-stroke-style',
-    name: 'blankStrokeStyle',
-    property: 'blankStrokeStyle'
+    name: 'blankStrokeStyle'
+  },{
+    type: 'checkbox',
+    label: 'packman-style',
+    name: 'packmanStyle'
   }]
 }
 
@@ -39,7 +39,8 @@ export default class ProgressCircle extends ValueHolder(Ellipse) {
       endAngle = 360,
       lineWidth = 20,
       blankStrokeStyle,
-      cx, cy, rx, ry
+      cx, cy, rx, ry,
+      packmanStyle = false
     } = this.model;
 
     this.animOnValueChange(this.value)
@@ -58,15 +59,24 @@ export default class ProgressCircle extends ValueHolder(Ellipse) {
     context.ellipse(cx, cy, Math.abs(rx), Math.abs(ry), 0, startAngleToRadian, endAngleToRadian)
 
     context.lineWidth = lineWidth
-    this.drawFill(context)
     context.stroke()
+
+    var percent = Math.min(Math.max(this.animValue / 100, 0), 100)
+
+    context.beginPath()
+    if(packmanStyle) {
+      context.ellipse(cx, cy, Math.abs(rx), Math.abs(ry), 0, startAngleToRadian, startAngleToRadian + ((endAngleToRadian - startAngleToRadian) * percent))
+      context.lineTo(cx, cy)
+    } else {
+      context.ellipse(cx, cy, Math.abs(rx), Math.abs(ry), 0, startAngleToRadian, endAngleToRadian)
+    }
+    this.drawFill(context)
 
     context.closePath()
 
     context.beginPath()
 
     ////  채워지는 원 그리기  ////
-    var percent = Math.min(Math.max(this.animValue / 100, 0), 100)
 
     context.ellipse(cx, cy, Math.abs(rx), Math.abs(ry), 0, startAngleToRadian, startAngleToRadian + ((endAngleToRadian - startAngleToRadian) * percent))
 
