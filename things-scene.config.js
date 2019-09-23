@@ -1,5 +1,3 @@
-import locales from './locales';
-
 import vertical from './assets/progress-vertical.png';
 import horizontal from './assets/progress-horizontal.png';
 import circle from './assets/progress-circle.png';
@@ -82,7 +80,6 @@ var templates = [{
 }]
 
 export default {
-    locales,
     templates
 };
   
