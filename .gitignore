@@ -10,3 +10,4 @@ dist
 *.report.html
 licenses/*.js
 db.sqlite
+yarn.lock
